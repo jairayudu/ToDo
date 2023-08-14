@@ -1,0 +1,80 @@
+<div mat-dialog-title>
+  <h1>TASK FORM</h1>
+</div>
+<form [formGroup]="taskForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="content">
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Task name</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Enter Task Name"
+          formControlName="taskName"
+          required=""
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input
+          matInput
+          placeholder="Enter Description"
+          formControlName="Description"
+          required=""
+        />
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Assign to</mat-label>
+        <mat-select formControlName="assignto">
+          <mat-option *ngFor="let val of assignto" [value]="val">{{
+            val
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>progress</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Progress"
+          formControlName="progress"
+          required=""
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-radio-group aria-label="Select an option" formControlName="Priority">
+        <mat-label><b>Priority</b></mat-label>
+        <mat-radio-button value="High">High</mat-radio-button>
+        <mat-radio-button value="Medium">Medium</mat-radio-button>
+        <mat-radio-button value="Low">Low</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Complete by</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dob" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions class="action">
+    <button mat-raised-button type="button" [mat-dialog-close]="false">
+      Cancel
+    </button>
+    <button mat-raised-button color="primary" type="submit">
+      {{ data ? "Update" : "Save" }}
+    </button>
+  </div>
+</form>
